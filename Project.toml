@@ -1,7 +1,7 @@
 name = "PolyChaos"
 uuid = "8d666b04-775d-5f6e-b778-5ac7c70f65a3"
 authors = ["Tillmann Mühlpfordt <tillmann.muehlpfordt@kit.edu>"]
-version = "0.2.4"
+version = "0.2.11"
 
 [deps]
 AdaptiveRejectionSampling = "c75e803d-635f-53bd-ab7d-544e482d8c75"
@@ -20,10 +20,10 @@ Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 [compat]
 AdaptiveRejectionSampling = "0.1"
 Combinatorics = "1.0"
-Distributions = "0.23, 0.24"
+Distributions = "0.23, 0.24, 0.25"
 FFTW = "1.2"
 GaussQuadrature = "0.5"
 QuadGK = "2.4"
-SpecialFunctions = "0.10, 1.0"
+SpecialFunctions = "0.10, 1.0, 2"
 StaticArrays = "0.12, 1.0"
-julia = "^1"
+julia = "1.6"
