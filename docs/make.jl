@@ -2,36 +2,29 @@
 # Pkg.add("Documenter")
 using Documenter, PolyChaos
 
-makedocs(
-    sitename = "PolyChaos.jl",
-    format = Documenter.HTML(assets = ["assets/myfont.css"]),
-    modules = [PolyChaos],
-    authors = "tillmann.muehlpfordt@kit.edu",
-    doctest = true,
-    pages = Any[
-        "index.md",
-        "type_hierarchy.md",
-        "Usage" => [
-            "numerical_integration.md",
-            "quadrature_rules.md",
-            "orthogonal_polynomials_canonical.md",
-            "gaussian_mixture_model.md",
-            "multiple_discretization.md",
-            "scalar_products.md",
-            "Polynomial Chaos" => [ "Basic Usage" => "pce_tutorial.md",
-                                    "Chi Squared, One DOF" => "chi_squared_k1.md",
-                                    "Chi Squared, Several DOFs" => "chi_squared_k_greater1.md",
-                                    "Random ODE" => "random_ode.md"
-                                  ],
-            "Optimal Power Flow" => "DCsOPF.md"
-            ],
-    "math.md",
-    "functions.md"
-    ]
-)
+cp("./docs/Manifest.toml", "./docs/src/assets/Manifest.toml", force = true)
+cp("./docs/Project.toml", "./docs/src/assets/Project.toml", force = true)
 
+include("pages.jl")
 
-deploydocs(
-    repo = "github.com/timueh/PolyChaos.jl.git",
-    target = "build",
-)
+makedocs(sitename = "PolyChaos.jl",
+         clean = true, doctest = false, linkcheck = true,
+         linkcheck_ignore = [
+             "https://www.sciencedirect.com/science/article/pii/S235246771830105X",
+         ],
+         strict = [
+             :doctest,
+             :linkcheck,
+             :parse_error,
+             # Other available options are
+             # :autodocs_block, :cross_references, :docs_block, :eval_block, :example_block, :footnote, :meta_block, :missing_docs, :setup_block
+         ],
+         format = Documenter.HTML(analytics = "UA-90474609-3",
+                                  assets = ["assets/favicon.ico"],
+                                  canonical = "https://docs.sciml.ai/PolyChaos/stable/"),
+         modules = [PolyChaos],
+         authors = "tillmann.muehlpfordt@kit.edu",
+         pages = pages)
+
+deploydocs(repo = "github.com/SciML/PolyChaos.jl.git",
+           target = "build")
